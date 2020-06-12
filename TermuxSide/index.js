@@ -16,6 +16,7 @@ if (!fs.existsSync(dir)) {
 
 function logger(type, label, sublabel, ...message) {
   label = sublabel ? ` ${label} ` : ` ${label} : `
+  sublabel = typeof sublabel !== "string" ? "" : sublabel
   switch (type) {
     case "log":
       label = `${chalk.bgBlue(label)} `;
