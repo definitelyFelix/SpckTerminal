@@ -15,20 +15,20 @@ if (!fs.existsSync(dir)) {
 }
 
 function logger(type, label, sublabel, ...message) {
-  sublabel = typeof sublabel !== "string" ? "" : sublabel
+  sublabel = typeof sublabel !== "string" ? "" : ` ${chalk.bold(sublabel)} `
   switch (type) {
     case "log":
-      label = `${chalk.bgBlue(label)} `;
+      label = chalk.bgBlue(label);
       break;
     case "info":
-      label = `${chalk.bgGreen(label)} `;
+      label = chalk.bgGreen(label);
       type = "info";
       break;
     case "error":
-      label = `${chalk.bgRed(label)} `;
+      label = chalk.bgRed(label);
       break;
     case "debug":
-      label = `${chalk.bgCyan(label)} `;
+      label = chalk.bgCyan(label);
       break;
   }
   console[type](label + sublabel, ...message)
