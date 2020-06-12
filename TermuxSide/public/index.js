@@ -54,10 +54,10 @@ function animateSync(stop) {
 // ----
 
 // -- project settings function --
-function displaySettings(data) {
+function displaySettings(settings) {
   var syncedInput = $("#filesync")
  // var envInput = $("#env")
-  //var env = JSON.stringify(data.env)
+  //var env = JSON.stringify(settings.env)
   //envInput.val(env === "null" ? "" : env)
   var files = settings.files.join('|')
   syncedInput.val(files === "null" ? "" : files)
@@ -81,7 +81,7 @@ function getProjectSettings(projectPath) {
   var id = btoa(projectPath);
   var settings = localStorage.getItem(id);
   if (!settings) return null
-  data = JSON.parse(data)
+  settings = JSON.parse(settings)
   return {
     projectPath: settings.projectPath,
     files: settings.files,
@@ -89,7 +89,7 @@ function getProjectSettings(projectPath) {
   }
 };
 function saveProjectSettings(settings) {
-  localStorage.setItem(btoa(data.projectPath), JSON.stringify({
+  localStorage.setItem(btoa(settings.projectPath), JSON.stringify({
     projectPath: settings.projectPath,
     syncedFiles: settings.syncedFiles || null,
     env: settings.env || null
@@ -149,7 +149,7 @@ saveBtn.on("click", function () {
   if (formSection.hasClass("d-none")) return alert("Please enter your project path and click ✅ then fill form");
   projectSettings = getSettings();
   if (/*!(projectSettings && projectSettings.env) &&*/ !(projectSettings && projectSettings.files)) return alert("Please fill at least one input or close the modal");
-  saveProjectData(projectSettings)
+  saveProjectSettings(projectSettings)
 
   /*if (options.env && !(JSON.stringify(terminalOptions.env) === JSON.stringify(options.env))) {
     Object.assign(terminalOptions.env, options.env) // actually doesnt work
