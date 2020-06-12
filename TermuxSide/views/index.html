@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/index.css" />
+    <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script defer src="/gritty/gritty.js"></script>
+    <script defer src="/assets/index.js"></script>
+    <script defer src="https://kit.fontawesome.com/f25a37f643.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <main id="main" class="container-fluid">
+      <div id="options" class="container-fluid p-1 bg-primary">
+        <button class="btn text-white" data-toggle="modal" data-target="#settings"><i class="fas fa-cog"></i></button>
+        <button id="sync" class="btn text-white"><i class="fa fa-sync"></i></button>
+
+        <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="settingsTitle">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="projectPath" class="col-form-label">Project Path</label>
+                  <input type="text" class="form-control" id="projectPath" placeholder="http://localhost:7700/myprojectname">
+                  <button id="projectSubmit" class="btn btn-primary"><i class="fa fa-check"></i></button>
+                  <div id="opts" class="d-none">
+                    <label for="filesync" class="col-form-label">Files To Sync</label>
+                    <input type="text" class="form-control" id="filesync" placeholder="index.html|css/index.css|js/index.js" aria-describedby="#filesyncHelp">
+                    <small id="filesyncHelp" class="text-muted">
+                      Separated by "|"
+                    </small>
+                    <br />
+                    <label for="env" class="col-form-label">Environnement Variables</label>
+                    <textarea class="form-control" id="env" placeholder="{&quot;env1&quot;: &quot;value1&quot;, &quot;env2&quot;: &quot;value2&quot;}" aria-describedby="#envHelp"></textarea>
+                    <small id="envHelp" class="text-muted">
+                      JSON Format (can be multiline)
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="save" type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="terminal-container" class="container-fluid p-3">
+        <div id="terminal"></div>
+      </div>
+    </main>
+  </body>
+</html>
