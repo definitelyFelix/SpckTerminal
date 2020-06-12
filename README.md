@@ -2,7 +2,7 @@
 
 ### Installation
   * #### In Termux:
-    1. **Unzip** `TermuxSide.zip` (available in [release](https://github.com/mestery69/SpckTerminal/releases/tag/v1.0.0))
+    1. **Unzip** `TermuxSide.zip` (available in [release](https://github.com/mestery69/SpckTerminal/releases/tag/v1.0.0-beta.1))
     2. **Copy** the folder into Termux
     3. **Run** `npm i` in Termux
     4. **Run** `npm start` in Termux (in the TermuxSide folder)
