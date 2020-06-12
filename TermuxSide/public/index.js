@@ -7,9 +7,28 @@
  * @author Mestery, Proxtx
  */
 
+var tty = gritty(document.getElementById("terminal"), terminalOptions);
+var term = tty.terminal; // the xterm.js instance
+var socket = tty.socket; // socket instance
+
+// global elements
+var submitBtn = $("#projectSubmit");
+var formSection = $("#opts");
+var projectInput = $("#projectPath");
+var saveBtn = $("#save");
+
+term.setOption("theme", {
+  background: "#1e1e1e",
+  foreground: "#b6bcd6",
+  selection: "#6f7bb6"
+}); // terminal custom theme
+
+term.writeln("\033[94mWelcome to \033[1mSpck - Termux Plugin 👋\033[0m\n"); // welcome message
+
+
 // -- files sync functions --
 function syncFiles() {
-  var files = settings.files;
+  var files = projectSettings.files;
   if (!files || !files.length) return alert("Please specifiy in settings the files to sync");
   animateSync()
   fetch("http://localhost:3000/sync", {
@@ -110,24 +129,6 @@ var projectSettings = {
   files: null, // an array of files to sync
   env: null // env variables
 }; // DON'T CHANGE THIS
-
-var tty = gritty(document.getElementById("terminal"), terminalOptions);
-var term = tty.terminal; // the xterm.js instance
-var socket = tty.socket; // socket instance
-
-// global elements
-var submitBtn = $("#projectSubmit");
-var formSection = $("#opts");
-var projectInput = $("#projectPath");
-var saveBtn = $("#save");
-
-term.setOption("theme", {
-  background: "#1e1e1e",
-  foreground: "#b6bcd6",
-  selection: "#6f7bb6"
-}); // terminal custom theme
-
-term.writeln("\033[94mWelcome to \033[1mSpck - Termux Plugin 👋\033[0m\n"); // welcome message
 
 projectInput.on("input", function() {
   if (!submitBtn.hasClass("d-none") && formSection.hasClass("d-none")) return;
