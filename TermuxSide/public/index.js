@@ -25,7 +25,6 @@ term.setOption("theme", {
 
 term.writeln("\033[94mWelcome to \033[1mSpck - Termux Plugin 👋\033[0m\n"); // welcome message
 
-
 // -- files sync functions --
 function syncFiles() {
   var files = projectSettings.files;

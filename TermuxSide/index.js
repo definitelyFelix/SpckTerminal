@@ -15,7 +15,7 @@ if (!fs.existsSync(dir)) {
 }
 
 function logger(type, label, sublabel, ...message) {
-  sublabel = typeof sublabel !== "string" ? "" : ` ${chalk.bold(sublabel)} `
+  sublabel = typeof sublabel !== "string" ? "" : ` ${sublabel}`
   switch (type) {
     case "log":
       label = chalk.bgBlue(label);
@@ -31,7 +31,7 @@ function logger(type, label, sublabel, ...message) {
       label = chalk.bgCyan(label);
       break;
   }
-  console[type](label + sublabel, ...message)
+  console[type](chalk.bold(label + sublabel), ...message)
 }
 
 app.use(gritty()) // the terminal middleware
@@ -60,7 +60,7 @@ app.post("/sync", (req, res) => {
   const syncedFiles = files.map(file => {
     let parsed = path.parse(file);
     return new Promise((resolve, reject) => {
-      require("download-file")(projectLink + "/" + n, { filename: parsed.base, directory: path.join(__dirname, "projects", projectName[projectName.length - 1], parsed.dir) }, (error, path) => {
+      require("download-file")(projectLink + "/" + file, { filename: parsed.base, directory: path.join(__dirname, "projects", projectName[projectName.length - 1], parsed.dir) }, (error, path) => {
         if (error) reject({ filename: file, error });
         else resolve({ filename: file, path }); // the path where the file is downloaded
       });
@@ -69,11 +69,11 @@ app.post("/sync", (req, res) => {
   Promise.allSettled(syncedFiles).then(files => {
     
     const unsyncedFiles = (string) => files.filter(promise => promise.status === "rejected").map(promise => ({ [promise.reason.filename]: (string ? String(promise.reason.error) : promise.reason.error) }))
-    if (unsyncedFiles.length) {
-      logger("error", "File Sync", "Download", "Fails : ", unsyncedFiles())
+    if (unsyncedFiles().length) {
+      logger("error", "File Sync", "Download", "Fails :", unsyncedFiles())
       res.json({ status: "ERROR", unsyncedFiles: unsyncedFiles(true) })
     } else {
-      logger("log", "File Sync", "Download", "Paths : ", files.map(promise => ({ [promise.value.filename]: promise.value.path })))
+      logger("log", "File Sync", "Download", "Paths :", files.map(promise => ({ [promise.value.filename]: promise.value.path })))
       res.json({ status: "OK" })
     }
 
