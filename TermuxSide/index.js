@@ -81,4 +81,4 @@ app.post("/sync", (req, res) => {
 });
 
 gritty.listen(socket.listen(server));
-server.listen(3000, () => logger("info", null, "Listening on port 3000."));
+server.listen(3000, () => logger("info", "Server", null, "Listening on port 3000."));
