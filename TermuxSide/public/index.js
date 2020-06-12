@@ -91,7 +91,7 @@ function getProjectSettings(projectPath) {
 function saveProjectSettings(settings) {
   localStorage.setItem(btoa(settings.projectPath), JSON.stringify({
     projectPath: settings.projectPath,
-    syncedFiles: settings.syncedFiles || null,
+    files: settings.files || null,
     env: settings.env || null
   }))
 };
