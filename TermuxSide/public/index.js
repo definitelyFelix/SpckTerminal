@@ -51,7 +51,7 @@ function syncFiles() {
       return;
     }
     console.log(r)
-    alert("The following files could not be synchronized\n\n" + JSON.stringify(r.unsyncedFiles));
+    alert("The following files could not be synchronized\n\n" + JSON.stringify(r.unsyncedFiles, null, 2));
   })
   .catch(e => {
     animateSync(true)
