@@ -7,6 +7,19 @@
  * @author Mestery, Proxtx
  */
 
+var terminalOptions = {
+  autoRestart: true, // auto reconnect
+  command: "bash", // bash or sh
+  cwd: "projects", // projects base dir, DONT CHANGE
+  env: {} // env variables - coming soon
+}; // DON'T CHANGE THIS
+
+var projectSettings = {
+  projectPath: null, // the project url
+  files: null, // an array of files to sync
+  env: null // env variables
+}; // DON'T CHANGE THIS
+
 var tty = gritty(document.getElementById("terminal"), terminalOptions);
 var term = tty.terminal; // the xterm.js instance
 var socket = tty.socket; // socket instance
@@ -114,20 +127,6 @@ function saveProjectSettings(settings) {
   }))
 };
 // ----
-
-
-var terminalOptions = {
-  autoRestart: true, // auto reconnect
-  command: "bash", // bash or sh
-  cwd: "projects", // projects base dir, DONT CHANGE
-  env: {} // env variables - coming soon
-}; // DON'T CHANGE THIS
-
-var projectSettings = {
-  projectPath: null, // the project url
-  files: null, // an array of files to sync
-  env: null // env variables
-}; // DON'T CHANGE THIS
 
 projectInput.on("input", function() {
   if (!submitBtn.hasClass("d-none") && formSection.hasClass("d-none")) return;
