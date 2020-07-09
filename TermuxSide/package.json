@@ -1,6 +1,6 @@
 {
   "name": "spckplugin",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "A plugin to integrate Terminal in browser (particulary for Spck Editor) and sync files",
   "main": "index.js",
   "engines": {
