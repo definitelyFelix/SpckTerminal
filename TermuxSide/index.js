@@ -52,7 +52,7 @@ app.post("/sync", (req, res) => {
   
   logger("info", "File Sync", "Received Project URL", projectLink);
 
-  Promise.allSettled(files.map(file => new Promise((resolve, reject) => download(projectLink.replace(projectName[projectName.length - 1], "") + "/" + file, join(__dirname,  "projects", projectName[projectName.length - 1], parse(file).dir), { filename: file }).then(r => resolve({ filename: file, stream: r })).catch(e => reject({ filename: file, error: e }))))).then(files => {
+  Promise.allSettled(files.map(file => new Promise((resolve, reject) => download(projectLink.replace(projectName[projectName.length - 1], "") + file, join(__dirname,  "projects", projectName[projectName.length - 1], parse(file).dir), { filename: file }).then(r => resolve({ filename: file, stream: r })).catch(e => reject({ filename: file, error: e }))))).then(files => {
     const unsyncedFiles = (string) => files.filter(promise => promise.status === "rejected").map(promise => ({ [promise.reason.filename]: (string ? String(promise.reason.error) : promise.reason.error) }))
    
     if (unsyncedFiles().length) {
